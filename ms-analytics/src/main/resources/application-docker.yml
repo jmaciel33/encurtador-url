@@ -1,0 +1,60 @@
+# Jetty Configurations
+server:
+    port: 8080
+    servlet:
+        context-path: /ms-analytics
+    compression:
+        enabled: true
+        mimeTypes: application/json
+        minResponseSize: 4096
+
+spring:
+    profiles: docker
+    rabbitmq:
+        listener:
+            simple:
+                retry:
+                    enabled: true
+                    max-attempts: 3
+    data:
+        cassandra:
+            contact-points: "host.docker.internal"
+            port: 9043
+            keyspace-name: "analytics"
+            schema-action: CREATE_IF_NOT_EXISTS
+            username: ""
+            password: ""
+            localdc: datacenter1
+            consistencylevel: LOCAL_ONE
+logging:
+    pattern:
+    level:
+        root: INFO
+
+
+# Management endpoints actuator
+management:
+    endpoints:
+        web:
+            base-path: /
+            exposure:
+                include:
+                    - health
+                    - metrics
+                    - info
+    metrics:
+        enable:
+            jvm.memory.used: true
+            process.uptime: true
+            jdbc.connections.active: true
+            process.cpu.usage: true
+            all: false
+    health:
+        cassandra:
+            enabled: false
+
+info:
+    app:
+        name: '@project.name@'
+        description: '@project.description@'
+        version: '@project.version@'

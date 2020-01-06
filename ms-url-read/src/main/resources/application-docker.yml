@@ -1,0 +1,70 @@
+# Jetty Configurations
+server:
+    port: 8080
+    servlet:
+        context-path: /ms-short
+    compression:
+        enabled: true
+        mimeTypes: application/json
+        minResponseSize: 4096
+
+spring:
+    profiles: docker
+    rabbitmq:
+        listener:
+            simple:
+                retry:
+                    enabled: true
+                    max-attempts: 3
+    data:
+        cassandra:
+            contact-points: "host.docker.internal"
+            port: 9043
+            keyspace-name: "encurtador"
+            schema-action: CREATE_IF_NOT_EXISTS
+            username: ""
+            password: ""
+            localdc: datacenter1
+            consistencylevel: LOCAL_ONE
+logging:
+    pattern:
+    level:
+        root: INFO
+
+
+broker:
+    addresses: host.docker.internal:5672
+    username: "guest"
+    password: "guest"
+    exchange: "encurtador-url"
+    routing-key: "encurtador-redirects.v1"
+    queue: "encurtador-url-redirects"
+
+# Management endpoints actuator
+management:
+    endpoints:
+        web:
+            base-path: /
+            exposure:
+                include:
+                    - health
+                    - metrics
+                    - info
+    metrics:
+        enable:
+            jvm.memory.used: true
+            process.uptime: true
+            jdbc.connections.active: true
+            process.cpu.usage: true
+            all: false
+    health:
+        rabbit:
+            enabled: false
+        cassandra:
+            enabled: false
+
+info:
+    app:
+        name: '@project.name@'
+        description: '@project.description@'
+        version: '@project.version@'

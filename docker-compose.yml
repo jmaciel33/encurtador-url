@@ -1,0 +1,128 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3.7'
+# Define services
+services:
+
+  # Database Service ES (Scylla)
+  db-encurtador-1:
+    image: scylladb/scylla
+    ports:
+      - "9042:9042"
+    restart: always
+    networks:
+      - encurtador
+
+  # Database Service (Scylla)
+  db-encurtador-2:
+    image: scylladb/scylla
+    ports:
+      - "9043:9042"
+    restart: always
+    networks:
+      - encurtador
+
+
+  # Database Service (Scylla)
+  broker-service:
+    image: rabbitmq:3.7.17-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "25676:25676"
+    restart: always
+    networks:
+      - encurtador
+
+  # Commander ms-encurtador-url
+  ms-encurtador-url:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ms-encurtador-url
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    restart: always
+    depends_on: 
+      - db-encurtador-1 
+      - broker-service
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - encurtador
+
+  # Event Store
+  ms-event-store:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ms-event-store
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    restart: always
+    depends_on: 
+      - db-encurtador-2
+      - broker-service
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - encurtador
+
+  # Event Refresher
+  ms-event-refresher:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ms-event-refresher 
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8080" 
+    restart: always
+    depends_on: 
+      - db-encurtador-2
+      - broker-service
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - encurtador
+
+  # Encurtador service
+  ms-url-read:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ms-url-read
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8080" 
+    restart: always
+    depends_on: 
+      - db-encurtador-2
+      - broker-service
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - encurtador
+
+  # Encurtador service
+  ms-analytics:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ms-analytics 
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080" 
+    restart: always
+    depends_on: 
+      - db-encurtador-2 
+      - broker-service
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - encurtador
+
+    # Encurtador service
+  ms-analytics-producer:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ms-analytics-producer
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8080" 
+    restart: always
+    depends_on: 
+      - db-encurtador-2 
+      - broker-service
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - encurtador
+
+# Networks to be created to facilitate communication between containers
+networks:
+  encurtador:

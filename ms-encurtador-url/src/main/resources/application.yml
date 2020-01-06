@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: '@project.name@'
+    build:
+        version: '@project.version@'
+    profiles:
+        active: docker

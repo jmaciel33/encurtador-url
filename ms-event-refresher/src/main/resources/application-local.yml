@@ -1,0 +1,70 @@
+# Jetty Configurations
+server:
+    port: 8083
+    servlet:
+        context-path: /ms-event-refresher
+    compression:
+        enabled: true
+        mimeTypes: application/json
+        minResponseSize: 4096
+
+spring:
+    profiles: local
+    rabbitmq:
+        listener:
+            simple:
+                retry:
+                    enabled: true
+                    max-attempts: 3
+    data:
+        cassandra:
+            contact-points: "localhost"
+            port: 9043
+            keyspace-name: "encurtador"
+            schema-action: CREATE_IF_NOT_EXISTS
+            username: ""
+            password: ""
+            localdc: datacenter1
+            consistencylevel: LOCAL_ONE
+logging:
+    pattern:
+    level:
+        root: INFO
+
+
+broker:
+    addresses: localhost:5672
+    username: "guest"
+    password: "guest"
+    exchange: "encurtador-url"
+    routing-key-refresh: "encurtador-command-refresher.v1"
+    queue: "encurtador-url-command-refresher"
+
+# Management endpoints actuator
+management:
+    endpoints:
+        web:
+            base-path: /
+            exposure:
+                include:
+                    - health
+                    - metrics
+                    - info
+    metrics:
+        enable:
+            jvm.memory.used: true
+            process.uptime: true
+            jdbc.connections.active: true
+            process.cpu.usage: true
+            all: false
+    health:
+        rabbit:
+            enabled: false
+        cassandra:
+            enabled: false
+
+info:
+    app:
+        name: '@project.name@'
+        description: '@project.description@'
+        version: '@project.version@'

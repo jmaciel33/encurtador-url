@@ -100,7 +100,7 @@ services:
       context: ms-analytics 
       dockerfile: Dockerfile
     ports:
-      - "8085:8080" 
+      - "8086:8080" 
     restart: always
     depends_on: 
       - db-encurtador-2 
@@ -115,7 +115,7 @@ services:
       context: ms-analytics-producer
       dockerfile: Dockerfile
     ports:
-      - "8086:8080" 
+      - "8085:8080" 
     restart: always
     depends_on: 
       - db-encurtador-2 

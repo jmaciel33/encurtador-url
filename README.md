@@ -47,12 +47,6 @@ $ docker run -d -p 15672:15672 -p 5672:5672 -p 25676:25676 rabbitmq:3.7.17-manag
 
 ## Casos de teste?
 
--  POST 
-
-
-Desafios | URL do MS  | Check
---------- | ------   ------
-Dado uma URL longa, ele devolve uma URL curta:    | http://localhost:8081/ms-encurtador-url/encurtador/v1/  | :check:
 
 | Desafios  |  URL do MS  | Métodos |
 | ------------------- | ------------------- |------------------- |

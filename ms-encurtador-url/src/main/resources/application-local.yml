@@ -70,4 +70,4 @@ info:
         version: '@project.version@'
 
 encurtador:
-    host: "http://localhost:8081/"
+    host: "http://localhost:8084/"

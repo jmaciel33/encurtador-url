@@ -35,4 +35,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
 EXPOSE 8084
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.encurtador.msurlread.MsUrlReadApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.encurtador.msanalytics.MsAnalyticsApplication"]

@@ -26,7 +26,7 @@ public class ScheduledServiceImpl implements ScheduledService {
     private EventRepository eventRepository;
 
     @Override
-    @Scheduled(cron = "0/15 * 0 ? * * ")
+    @Scheduled(cron = "0 0/1 * 1/1 * ?")
     public void resendEventsToBroker() {
 
         final List<Command> commands = this.eventRepository.findAll();

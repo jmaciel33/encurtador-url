@@ -12,6 +12,15 @@ Desta forma, queremos prover a equipe de marketing ferramentas que possibilitem 
 
 ![Alt Text](https://github.com/jmaciel33/encurtador-url/blob/master/Encurtador%20URL.png)
 
+## Tecnologias?
+
+- Java 11
+- Spring Boot
+- Maven
+- RabbitMQ
+- ScyllaDB
+- Docker
+- Docker-compose
  
 ## Como utilizar?
  

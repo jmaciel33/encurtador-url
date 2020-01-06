@@ -3,5 +3,4 @@ CREATE KEYSPACE encurtador WITH replication = {'class': 'SimpleStrategy', 'repli
 CREATE TABLE encurtador.short_url (
   short_url text,
   original_url text,
-  PRIMARY KEY (short_url)
-)
+  PRIMARY KEY (short_url))

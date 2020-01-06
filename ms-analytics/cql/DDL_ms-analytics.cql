@@ -4,6 +4,5 @@ CREATE TABLE analytics.encurtador (
   short_url text,
   event_date timestamp,
   original_url text,
-  PRIMARY KEY (short_url, event_date)
-)
+  PRIMARY KEY (short_url, event_date))
 

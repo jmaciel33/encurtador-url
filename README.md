@@ -56,7 +56,7 @@ $ docker run -d -p 15672:15672 -p 5672:5672 -p 25676:25676 rabbitmq:3.7.17-manag
 |  Apagar URLs  |  http://localhost:8081/ms-encurtador-url/encurtador/v1/ | DELETE |
 |  Redirect |  http://localhost:8084/ms-short/v1/| GET |
 
-  [CRia](http://exemplo.com/)
+  [Collection Postman p/ testes](https://github.com/jmaciel33/encurtador-url/blob/master/Encurtador%20URLs.postman_collection.json)
 
 
 

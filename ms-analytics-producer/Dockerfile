@@ -33,6 +33,6 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-EXPOSE 8084
+EXPOSE 8085
 
 ENTRYPOINT ["java","-cp","app:app/lib/*","com.encurtador.msanalytics.MsAnalyticsProducerApplication"]

@@ -2,12 +2,6 @@
 
 Plataforma baseada em microserviços para encurtar URLs, com isso é possivel prover a equipe de marketing ferramentas que possibilitem o envio de comunicações por canais de mensageria, tais como SMS e Twitter.
 
-# O problema
-
-O Mercado Livre vem crescendo de maneira muito acelerada nos últimos anos. A experiência do usuário durante a compra e ao grande número de produtos em nosso catálogo são as chaves para entendermos este crescimento. No entanto, não conseguiríamos atingir este patamar sem grandes campanhas de marketing.
-
-Desta forma, queremos prover a equipe de marketing ferramentas que possibilitem o envio de comunicações por canais de mensageria, tais como SMS e Twitter. Nestes canais, é muito importante que as comunicações sejam curtas, assim faz-se necessário o desenvolvimento de um encurtador de URLs.
-
 #  Desenho de solução
 
 ![Alt Text](https://github.com/jmaciel33/encurtador-url/blob/master/Encurtador%20URL.png)

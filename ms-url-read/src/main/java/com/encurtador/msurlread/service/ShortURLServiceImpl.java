@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,11 @@ public class ShortURLServiceImpl implements ShortURLService {
     }
 
     @Override
+    public List<ShortURL> getAllUrls() {
+        return this.shortURLRepository.findAll();
+    }
+
+    @Override
     public void sendEventToBroker(ReadEvent readEvent) {
 
         try {
@@ -63,5 +69,6 @@ public class ShortURLServiceImpl implements ShortURLService {
     public OriginalURLDTO getOriginalURLForRedirect(String shortURLKey) throws URLNotFoundException {
         final ShortURL shortURL = this.getshortURL(shortURLKey);
         this.sendEventToBroker(new ReadEvent(shortURL.getShortUrl(), new Date(), shortURL.getOriginalUrl()));
-        return new OriginalURLDTO(shortURL.getOriginalUrl());    }
+        return new OriginalURLDTO(shortURL.getOriginalUrl());
+    }
 }

@@ -21,13 +21,21 @@ public class ShortURLController {
     private ShortURLService shortURLService;
 
     @GetMapping(value = "/{shortURL}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public DeferredResult<ResponseEntity<?>> deleteShortURL(@PathVariable("shortURL") String shortURL) throws URLNotFoundException {
+    public DeferredResult<ResponseEntity<?>> getShort(@PathVariable("shortURL") String shortURL) throws URLNotFoundException {
 
         final DeferredResult<ResponseEntity<?>> response = new DeferredResult<>();
         final OriginalURLDTO originalURLDTO = this.shortURLService.getOriginalURL(shortURL);
-        response.setResult(new ResponseEntity<>(originalURLDTO,HttpStatus.OK));
+        response.setResult(new ResponseEntity<>(originalURLDTO, HttpStatus.OK));
 
         return response;
     }
 
+
+    @GetMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public DeferredResult<ResponseEntity<?>> getAllShortUrl() throws URLNotFoundException {
+        final DeferredResult<ResponseEntity<?>> response = new DeferredResult<>();
+        response.setResult(new ResponseEntity<>(this.shortURLService.getAllUrls(), HttpStatus.OK));
+
+        return response;
+    }
 }

@@ -58,8 +58,6 @@ management:
             process.cpu.usage: true
             all: false
     health:
-        rabbit:
-            enabled: false
         cassandra:
             enabled: false
 

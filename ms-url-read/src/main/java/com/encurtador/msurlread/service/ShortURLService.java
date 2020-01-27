@@ -5,11 +5,12 @@ import com.encurtador.msurlread.domain.ReadEvent;
 import com.encurtador.msurlread.domain.ShortURL;
 import com.encurtador.msurlread.exception.URLNotFoundException;
 
+import java.util.List;
+
 /**
  * The interface Short url service.
  */
 public interface ShortURLService {
-
 
 
     /**
@@ -17,8 +18,17 @@ public interface ShortURLService {
      *
      * @param shortURLKey the short url
      * @return the url
+     * @throws URLNotFoundException the url not found exception
      */
     ShortURL getshortURL(String shortURLKey) throws URLNotFoundException;
+
+
+    /**
+     * Gets all urls.
+     *
+     * @return the all urls
+     */
+    List<ShortURL> getAllUrls();
 
     /**
      * Send event to broker.
